@@ -1,0 +1,256 @@
+<div class="container-fluid">
+    <div class="div1">
+        <div class="row navigationBar">
+            <div class="col-7"></div>
+            <div class="col-3">
+                <ul class="d-flex justify-content-between">
+                    <li class="f-18 f-white"><a href="#">Add Restraurant </a></li>
+                    <li class="f-18 f-white">
+                        <a data-toggle="modal" data-target="#loginModal" style="cursor: pointer">Log in
+            </a>
+                    </li>
+                    <li class="f-18 f-white"><a data-toggle="modal" data-target="#registrationModal" style="cursor: pointer">Sign up </a></li>
+                </ul>
+            </div>
+            <div class="col-2"></div>
+        </div>
+        <div class="flex-center mainContent">
+            <p class="f-white">Find the best restaurant, cafe's</p>
+        </div>
+    </div>
+    <!-- div6 -->
+    <div class="container-fluid" style="background-color: rgb(246, 247, 246); padding: 10px">
+        <div class="container">
+            <h1 class="text-center">Restraurants</h1>
+            <div class="row">
+                <div class="col-3" *ngFor="let item of restaurantBox">
+                    <div class="restaurantBox">
+                        <img [src]="item.image" alt="" class="restaurantBoxImage" />
+                        <h3 class="text-center">{{ item.restaurantNames }}</h3>
+                        <p class="text-center">
+                            <i>{{ item.offer }}</i>
+                        </p>
+                        <p class="text-center">{{ item.city }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- div7 -->
+    <div class="container-fluid">
+        <h1 class="text-center">Offer of the week</h1>
+        <div class="row">
+            <div class="col-2" *ngFor="let item of offerFood">
+                <div class="offerBox">
+                    <h5 class="text-center">{{ item.dishName }}</h5>
+                    <img [src]="item.image" alt="" class="offerBoxImage" />
+                    <p class="text-center">
+                        <i>{{ item.offer }}</i>
+                    </p>
+                    <h5 class="text-center"><i>Hotel</i> : {{ item.restaurantName }}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="div2">
+        <h1 class="d-flex justify-content-center p-2">
+            Popular locations in
+            <img src="../../assets/indianFlag.jpg" alt="Indian Flag" class="flagStyle" /> India
+        </h1>
+        <div class="flex-center">
+            <p class="contentBox d-flex justify-content-center">
+                From swanky upscale restaurants to the cosiest hidden gems serving the most incredible food, Zomato covers it all. Explore menus, and millions of restaurant photos and reviews from users just like you, to find your next great meal.
+            </p>
+        </div>
+    </div>
+
+    <div class="div3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4" *ngFor="let item of restaurantNames">
+                    <div class="boxes d-flex justify-content-between my-2" (click)="restaurantPage()">
+                        <span class="restaurantName">{{ item }}</span>
+                        <div class="arrow">&gt;</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="div4 my-4">
+        <div class="container">
+            <h4>All Countries</h4>
+            <div class="row">
+                <div class="col-md-4" *ngFor="let item of allCountries">
+                    <div class="boxes d-flex justify-content-between my-2">
+                        <span class="restaurantName"><img [src]="item.image" class="flagStyleCountries" alt="Flage" />
+              {{ item.countryName }}</span
+            >
+            <div class="arrow">&gt;</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="div5 footer py-2">
+    <div class="row">
+      <div class="col-4"></div>
+      <div class="col-4">
+        <span class="icon"><i class="fab fa-facebook"></i></span>
+                        <span class="icon"><i class="fab fa-twitter"></i></span>
+                        <span class="icon"><i class="fab fa-instagram"></i></span>
+                        <span class="icon"><i class="fab fa-linkedin"></i></span>
+                        <span class="icon"><i class="fab fa-pinterest"></i></span>
+                        <span class="icon"><i class="fab fa-youtube"></i></span>
+                    </div>
+                    <div class="col-4"></div>
+                </div>
+                <hr />
+                <div class="flex-center">
+                    <p class="footerContent">
+                        By continuing past this page, you agree to our Terms of Service, Cookie Policy, Privacy Policy and Content Policies. All trademarks are properties of their respective owners. 2008-2023 © Zomato™ Ltd. All rights reserved.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- login modal -->
+        <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="loginModalLabel">
+                            <p class="text-center">Login</p>
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                            <div class="form-group">
+                                <label for="username">Username</label>
+                                <input type="text" class="form-control" id="username" formControlName="username" placeholder="Enter your username" />
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <div class="input-group">
+                                    <input type="password" class="form-control" id="password" formControlName="password" placeholder="Enter your password" />
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" (click)="togglePasswordVisibility()">
+                                            <i
+                                                class="fa"
+                                                [ngClass]="{
+                                                'fa-eye': showPassword,
+                                                'fa-eye-slash': !showPassword
+                                                }"
+                                                id="eye-icon"
+                                            ></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <button type="submit" class="btn btn-outline-primary">
+                                Login
+                                </button>
+                            </div>
+                            <div class="d-flex justify-content-center mt-2">
+                                <p>Forget Password</p>
+                            </div>
+                            <div>
+                                <p>New to this app..?<span style="color: red;">Create account</span></p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Registration Form -->
+        <div class="modal fade" id="registrationModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="loginModalLabel">
+                            <p class="text-center">Sign up</p>
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Reactive form -->
+                        <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="username" formControlName="usernameReg" placeholder="Full Name" />
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" id="username" formControlName="emailReg" placeholder="Email" />
+                                <div *ngIf="registrationForm.get('emailReg')?.hasError('required') && registrationForm.get('emailReg')?.touched" class="text-danger">
+                                    Email is required.
+                                </div>
+                                <div *ngIf="registrationForm.get('emailReg')?.hasError('emailReg') && registrationForm.get('emailReg')?.touched" class="text-danger">
+                                    Please enter a valid Email.
+                                </div>
+                            </div>
+                            <div class="form-group" *ngIf="responseMessage">
+                                <div class="emailExist">
+                                    <p>{{responseMessage}}</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="password" class="form-control" id="password" formControlName="passwordReg" placeholder="Password" />
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" (click)="togglePasswordVisibility()">
+                                            <i
+                                                class="fa"
+                                                [ngClass]="{
+                                                'fa-eye': showPassword,
+                                                'fa-eye-slash': !showPassword
+                                                }"
+                                                id="eye-icon"
+                                            ></i>
+                                        </span>
+                                    </div>
+                                    <div *ngIf="registrationForm.get('password')?.hasError('required') && registrationForm.get('password')?.touched" class="text-danger">
+                                        Password is required.
+                                    </div>
+                                    <div *ngIf="registrationForm.get('password')?.hasError('minlength') && registrationForm.get('password')?.touched" class="text-danger">
+                                        Password must be at least 6 characters long.
+                                    </div>
+                                    <div *ngIf="registrationForm.get('password')?.hasError('invalidPassword') && registrationForm.get('password')?.touched" class="text-danger">
+                                        Password must contain at least one uppercase letter, one lowercase letter, and one number.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="checkbox" formControlName="agreePolicyReg" name="agreePolicy" id="agreePolicy">
+                                <span>
+                                    I agree to Zomato's <span style="color: red;">Terms of Service, Privacy Policy</span> and <span style="color: red;">Content Policies</span></span>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <button type="submit" class="btn btn-secondary" [disabled]="!registrationForm.valid">
+                                Create account
+                                </button>
+                            </div>
+                            <div class="text-center">
+                                <p>or</p>
+                            </div>
+                            <div class="form-group">
+                                <div class="googleBox text-center">
+                                    <img src="../../assets/google.png" height="25px" alt="google" style="margin-right: 10px;"><span>Continue with google</span>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center mt-2">
+                                <p><i>Already have account.?</i><a href="#">Login</a></p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
